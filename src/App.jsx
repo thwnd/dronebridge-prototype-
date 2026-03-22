@@ -624,7 +624,7 @@ function Shell({ role, sec, setSec, go, children }) {
     <div style={{ display:"flex", height:"100vh", overflow:"hidden", background:G.bg }}>
       {/* SIDEBAR */}
       <div className="sidebar">
-        <div style={{ padding:"4px 6px 20px" }}>
+        <div style={{ padding:"4px 6px 20px", cursor:"pointer" }} onClick={() => go("landing")} title="메인으로">
           <Logo size={18} />
         </div>
         {/* role chip */}
@@ -660,6 +660,14 @@ function Shell({ role, sec, setSec, go, children }) {
         <div className="appbar">
           <div className="heading" style={{ fontSize:18 }}>{nav.find(n=>n.k===sec)?.label}</div>
           <div className="flex items-center gap16">
+            <button
+              onClick={() => go("landing")}
+              className="btn btn-ghost btn-sm"
+              style={{ fontSize:13, display:"flex", alignItems:"center", gap:6 }}
+              title="메인 화면으로"
+            >
+              🏠 메인으로
+            </button>
             <div style={{ width:10, height:10, borderRadius:"50%", background:G.mint, boxShadow:`0 0 0 3px ${G.mintLight}` }} />
             <div className="avatar" style={{ width:38, height:38, background:`${roleColor}20`, border:`2px solid ${roleColor}30`, fontSize:15, color:roleColor }}>{roleName[0]}</div>
           </div>
