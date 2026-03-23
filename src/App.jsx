@@ -134,6 +134,112 @@ select option { background: #fff; }
 .w-full { width: 100%; }
 .text-center { text-align: center; }
 
+/* ══════════════════════════════════════
+   RESPONSIVE — 모바일 반응형
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* 그리드 → 전부 1열 */
+  .grid2, .grid3, .grid4 { grid-template-columns: 1fr !important; gap: 12px !important; }
+
+  /* 카드 패딩 축소 */
+  .card-p { padding: 16px !important; }
+  .card-p-lg { padding: 20px !important; }
+
+  /* 랜딩 NAV */
+  .topnav { padding: 0 16px !important; height: 56px !important; }
+  .nav-center { display: none !important; }
+
+  /* 탭바 스크롤 */
+  .tabbar { overflow-x: auto !important; white-space: nowrap !important; -webkit-overflow-scrolling: touch !important; }
+  .tab { padding: 7px 12px !important; font-size: 12px !important; flex-shrink: 0 !important; }
+
+  /* 사이드바 → 하단 고정 탭바 */
+  .shell-wrap { flex-direction: column !important; }
+  .sidebar {
+    width: 100% !important;
+    height: 60px !important;
+    flex-direction: row !important;
+    padding: 0 4px !important;
+    border-right: none !important;
+    border-top: 1.5px solid ${G.line} !important;
+    position: fixed !important;
+    bottom: 0 !important; left: 0 !important; right: 0 !important;
+    z-index: 200 !important;
+    overflow-x: auto !important;
+    gap: 0 !important;
+    box-shadow: 0 -3px 16px rgba(0,0,0,0.07) !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+    background: ${G.white} !important;
+  }
+  .sidebar-logo  { display: none !important; }
+  .sidebar-role  { display: none !important; }
+  .sidebar-bottom{ display: none !important; }
+  .sidebar-link {
+    flex-direction: column !important;
+    gap: 2px !important;
+    padding: 6px 4px !important;
+    font-size: 10px !important;
+    border-radius: 8px !important;
+    min-width: 52px !important;
+    flex: 1 !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .sidebar-link.active {
+    background: transparent !important;
+    color: ${G.sky} !important;
+    box-shadow: none !important;
+    border-top: 2.5px solid ${G.sky} !important;
+    border-radius: 0 !important;
+  }
+
+  /* 앱 콘텐츠 — 하단 탭바 높이만큼 패딩 */
+  .shell-content { padding: 16px 16px 76px !important; }
+
+  /* 앱바 */
+  .appbar { padding: 0 14px !important; height: 52px !important; }
+  .appbar-home-btn { font-size: 12px !important; padding: 6px 10px !important; }
+
+  /* 스텝 트랙 축소 */
+  .step-track { width: 20px !important; }
+  .step-node  { width: 28px !important; height: 28px !important; font-size: 12px !important; }
+
+  /* 모달 → 하단 시트 */
+  .overlay { align-items: flex-end !important; padding: 0 !important; }
+  .modal {
+    border-radius: 20px 20px 0 0 !important;
+    padding: 24px 20px 36px !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* 버튼 그룹 세로 배치 */
+  .btn-row { flex-direction: column !important; gap: 8px !important; }
+  .btn-row .btn { width: 100% !important; }
+
+  /* 의뢰 상세 레이아웃 */
+  .detail-wrap { flex-direction: column !important; }
+  .detail-right { width: 100% !important; }
+
+  /* 채팅 */
+  .chat-wrap { flex-direction: column !important; height: calc(100vh - 130px) !important; }
+  .chat-list-panel { width: 100% !important; height: 180px !important; flex-shrink: 0 !important; }
+
+  /* 통계 카드 */
+  .stat { padding: 14px 16px !important; }
+
+  /* 히어로 플로팅 카드 숨김 */
+  .hero-float { display: none !important; }
+
+  /* 랜딩 섹션 패딩 */
+  .landing-section { padding: 48px 20px !important; }
+
+  /* CTA 배너 */
+  .cta-inner { flex-direction: column !important; gap: 12px !important; }
+  .cta-inner .btn { width: 100% !important; }
+}
+
 /* ── Nav ── */
 .topnav {
   position: sticky; top: 0; z-index: 200;
@@ -317,7 +423,7 @@ function Landing({ go }) {
       {/* ── NAV ── */}
       <nav className="topnav">
         <Logo />
-        <div className="flex items-center gap8">
+        <div className="flex items-center gap8 nav-center">
           {["서비스 소개","이용 방법","파일럿 찾기"].map(t => (
             <button key={t} className="nav-link">{t}</button>
           ))}
@@ -329,26 +435,26 @@ function Landing({ go }) {
       </nav>
 
       {/* ── HERO ── */}
-      <section style={{ background:`linear-gradient(160deg, ${G.skyLight} 0%, ${G.white} 55%, ${G.coralLight} 100%)`, padding:"80px 48px 0", position:"relative", overflow:"hidden" }}>
+      <section className="hero-section" style={{ background:`linear-gradient(160deg, ${G.skyLight} 0%, ${G.white} 55%, ${G.coralLight} 100%)`, padding:"80px 48px 0", position:"relative", overflow:"hidden" }}>
         {/* decorative blobs */}
         <div style={{ position:"absolute", top:-60, right:80, width:320, height:320, borderRadius:"50%", background:`radial-gradient(circle, rgba(59,158,255,0.12), transparent 70%)`, pointerEvents:"none" }} />
         <div style={{ position:"absolute", bottom:-40, left:100, width:240, height:240, borderRadius:"50%", background:`radial-gradient(circle, rgba(255,107,74,0.1), transparent 70%)`, pointerEvents:"none" }} />
 
-        <div style={{ maxWidth:1100, margin:"0 auto", display:"grid", gridTemplateColumns:"1fr 1fr", gap:60, alignItems:"flex-end" }}>
+        <div className="hero-grid-wrap" style={{ maxWidth:1100, margin:"0 auto", display:"grid", gridTemplateColumns:"1fr 1fr", gap:60, alignItems:"flex-end" }}>
           {/* LEFT */}
           <div className="anim-up" style={{ paddingBottom:80 }}>
             <div className="badge badge-sky" style={{ marginBottom:20, fontSize:13 }}>
               🚁 드론 매칭 플랫폼 #1
             </div>
-            <h1 className="display" style={{ fontSize:52, lineHeight:1.15, marginBottom:22, color:G.ink }}>
+            <h1 className="display hero-title" style={{ fontSize:52, lineHeight:1.15, marginBottom:22, color:G.ink }}>
               드론이 필요할 때,<br />
               <span style={{ color:G.sky }}>가장 가까운 파일럿</span><br />과 연결해 드려요
             </h1>
-            <p style={{ fontSize:17, color:G.sub, lineHeight:1.7, marginBottom:36 }}>
+            <p className="hero-sub" style={{ fontSize:17, color:G.sub, lineHeight:1.7, marginBottom:36 }}>
               촬영부터 측량·점검까지.<br />
               인증된 파일럿을 간편하게 매칭하세요.
             </p>
-            <div className="flex gap12" style={{ flexWrap:"wrap" }}>
+            <div className="flex gap12 hero-btns" style={{ flexWrap:"wrap" }}>
               <button className="btn btn-sky" style={{ fontSize:16, padding:"15px 30px" }} onClick={() => go("signup")}>
                 🛸 드론 의뢰하기
               </button>
@@ -356,7 +462,7 @@ function Landing({ go }) {
                 ✈️ 파일럿으로 일하기
               </button>
             </div>
-            <div className="flex gap24" style={{ marginTop:36 }}>
+            <div className="flex gap24 hero-stats" style={{ marginTop:36 }}>
               {[["1,247명","등록 파일럿"],["8,903건","완료 의뢰"],["4.9점","평균 만족도"]].map(([v,l]) => (
                 <div key={l}>
                   <div className="label" style={{ fontSize:22, color:G.ink }}>{v}</div>
@@ -367,9 +473,9 @@ function Landing({ go }) {
           </div>
 
           {/* RIGHT – floating card illustration */}
-          <div style={{ position:"relative", height:420, display:"flex", alignItems:"flex-end", justifyContent:"center" }}>
+          <div className="hero-float" style={{ position:"relative", height:420, display:"flex", alignItems:"flex-end", justifyContent:"center" }}>
             {/* main card */}
-            <div className="card float" style={{ padding:24, width:300, position:"absolute", bottom:60, right:20, zIndex:2, boxShadow:"0 12px 40px rgba(59,158,255,0.18)" }}>
+            <div className="card float hero-float" style={{ padding:24, width:300, position:"absolute", bottom:60, right:20, zIndex:2, boxShadow:"0 12px 40px rgba(59,158,255,0.18)" }}>
               <div className="flex items-center gap12" style={{ marginBottom:14 }}>
                 <div className="avatar" style={{ width:44, height:44, background:`linear-gradient(135deg,${G.sky},${G.violet})`, fontSize:18 }}>😊</div>
                 <div>
@@ -402,7 +508,7 @@ function Landing({ go }) {
       </section>
 
       {/* ── HOW IT WORKS ── */}
-      <section style={{ padding:"80px 48px", background:G.bg }}>
+      <section className="landing-section" style={{ padding:"80px 48px", background:G.bg }}>
         <div style={{ maxWidth:900, margin:"0 auto" }}>
           <div className="text-center" style={{ marginBottom:48 }}>
             <div className="badge badge-sky" style={{ marginBottom:12 }}>이용 방법</div>
@@ -428,7 +534,7 @@ function Landing({ go }) {
       </section>
 
       {/* ── USE CASES ── */}
-      <section style={{ padding:"80px 48px", background:G.white }}>
+      <section className="landing-section" style={{ padding:"80px 48px", background:G.white }}>
         <div style={{ maxWidth:1000, margin:"0 auto" }}>
           <div className="text-center" style={{ marginBottom:48 }}>
             <div className="badge badge-coral" style={{ marginBottom:12 }}>활용 사례</div>
@@ -457,7 +563,7 @@ function Landing({ go }) {
           <div style={{ fontSize:40, marginBottom:16 }}>🚁</div>
           <h2 className="display" style={{ fontSize:36, color:"#fff", marginBottom:14 }}>지금 바로 시작하세요</h2>
           <p style={{ color:"rgba(255,255,255,0.8)", fontSize:16, marginBottom:32 }}>회원가입 후 즉시 의뢰 등록 또는 일감 수주가 가능합니다</p>
-          <div className="flex gap12 justify-center">
+          <div className="flex gap12 justify-center cta-inner">
             <button className="btn" style={{ background:"#fff", color:G.sky, fontSize:15, padding:"14px 28px", boxShadow:"0 4px 14px rgba(0,0,0,0.15)" }} onClick={() => go("signup")}>의뢰 등록하러 가기</button>
             <button className="btn" style={{ background:"rgba(255,255,255,0.2)", color:"#fff", border:"2px solid rgba(255,255,255,0.4)", fontSize:15, padding:"14px 28px" }} onClick={() => go("signup-pilot")}>파일럿 등록하기</button>
           </div>
@@ -520,7 +626,7 @@ function AuthPage({ go, mode }) {
         <h2 className="heading" style={{ fontSize:30 }}>어떻게 이용하시겠어요? 🤔</h2>
         <p style={{ color:G.sub, marginTop:8 }}>역할을 선택해 주세요</p>
       </div>
-      <div className="grid2" style={{ gap:20 }}>
+      <div className="grid2 role-grid" style={{ gap:20 }}>
         {[
           { key:"client", emoji:"🛸", title:"드론이 필요해요", desc:"행사 촬영·현장 점검·측량 등을 의뢰하고 싶을 때", cta:"클라이언트로 시작하기", cls:"btn-sky", border:G.sky },
           { key:"pilot",  emoji:"🎮", title:"드론으로 일하고 싶어요", desc:"드론 실력을 활용해 수익을 만들고 싶을 때", cta:"파일럿으로 시작하기", cls:"btn-coral", border:G.coral },
@@ -555,7 +661,7 @@ function AuthPage({ go, mode }) {
           <button style={{ marginLeft:"auto", background:"none", border:"none", cursor:"pointer", color:G.muted }} onClick={() => setStep(0)}><Ico n="x" s={18} /></button>
         </div>
         <div className="flex-col gap14">
-          <div className="grid2">
+          <div className="grid2 form-grid2">
             <div className="field"><label>이름</label><input className="input" placeholder="홍길동" /></div>
             <div className="field"><label>휴대폰</label><input className="input" placeholder="010-0000-0000" /></div>
           </div>
@@ -621,59 +727,57 @@ function Shell({ role, sec, setSec, go, children }) {
   const roleEmoji = role === "pilot" ? "✈️" : role === "admin" ? "⚙️" : "🛸";
 
   return (
-    <div style={{ display:"flex", height:"100vh", overflow:"hidden", background:G.bg }}>
-      {/* SIDEBAR */}
+    <div className="shell-wrap" style={{ display:"flex", height:"100vh", overflow:"hidden", background:G.bg }}>
+      {/* SIDEBAR — 데스크탑: 좌측 | 모바일: 하단 탭바 */}
       <div className="sidebar">
-        <div style={{ padding:"4px 6px 20px", cursor:"pointer" }} onClick={() => go("landing")} title="메인으로">
+        {/* 로고 — 모바일에서 숨김 */}
+        <div className="sidebar-logo" style={{ padding:"4px 6px 20px", cursor:"pointer" }} onClick={() => go("landing")}>
           <Logo size={18} />
         </div>
-        {/* role chip */}
-        <div style={{ background:roleColor+"15", border:`1.5px solid ${roleColor}30`, borderRadius:12, padding:"8px 12px", marginBottom:16, display:"flex", alignItems:"center", gap:8 }}>
+        {/* 역할 칩 — 모바일에서 숨김 */}
+        <div className="sidebar-role" style={{ background:roleColor+"15", border:`1.5px solid ${roleColor}30`, borderRadius:12, padding:"8px 12px", marginBottom:16, display:"flex", alignItems:"center", gap:8 }}>
           <span style={{ fontSize:18 }}>{roleEmoji}</span>
           <div>
             <div style={{ fontSize:11, color:G.muted, fontWeight:600 }}>{roleLabel} 계정</div>
             <div className="label" style={{ fontSize:13, color:G.ink }}>{roleName}</div>
           </div>
         </div>
+        {/* 네비 링크 */}
         {nav.map(n => (
           <button key={n.k} className={`sidebar-link ${sec === n.k ? "active" : ""}`} onClick={() => setSec(n.k)}>
-            <Ico n={n.ico} s={16} c={sec === n.k ? "#fff" : G.muted} />
+            <Ico n={n.ico} s={18} c={sec === n.k ? G.sky : G.muted} />
             {n.label}
           </button>
         ))}
-        <div style={{ flex:1 }} />
-        <div style={{ borderTop:`1.5px solid ${G.line}`, paddingTop:12 }}>
-          {/* view switcher */}
-          <div style={{ fontSize:11, color:G.muted, fontWeight:600, padding:"6px 14px 8px" }}>다른 뷰 보기</div>
-          {[["client-dashboard","🛸 클라이언트"],["pilot-dashboard","✈️ 파일럿"],["admin-dashboard","⚙️ 관리자"]].map(([p,l]) => (
-            <button key={p} className="sidebar-link" style={{ fontSize:12, padding:"8px 14px" }} onClick={() => go(p)}>{l}</button>
-          ))}
-          <button className="sidebar-link" style={{ marginTop:8, color:G.coral }} onClick={() => go("landing")}>
-            <Ico n="logout" s={15} c={G.coral} /> 로그아웃
-          </button>
+        {/* 하단 뷰 전환 — 모바일에서 숨김 */}
+        <div className="sidebar-bottom" style={{ flex:1, display:"flex", flexDirection:"column", justifyContent:"flex-end" }}>
+          <div style={{ borderTop:`1.5px solid ${G.line}`, paddingTop:12 }}>
+            <div style={{ fontSize:11, color:G.muted, fontWeight:600, padding:"6px 14px 8px" }}>다른 뷰 보기</div>
+            {[["client-dashboard","🛸 클라이언트"],["pilot-dashboard","✈️ 파일럿"],["admin-dashboard","⚙️ 관리자"]].map(([p,l]) => (
+              <button key={p} className="sidebar-link" style={{ fontSize:12, padding:"8px 14px" }} onClick={() => go(p)}>{l}</button>
+            ))}
+            <button className="sidebar-link" style={{ marginTop:8, color:G.coral }} onClick={() => go("landing")}>
+              <Ico n="logout" s={15} c={G.coral} /> 로그아웃
+            </button>
+          </div>
         </div>
       </div>
 
       {/* MAIN */}
-      <div style={{ flex:1, display:"flex", flexDirection:"column", overflow:"hidden" }}>
+      <div className="app-main" style={{ flex:1, display:"flex", flexDirection:"column", overflow:"hidden" }}>
         {/* APPBAR */}
         <div className="appbar">
-          <div className="heading" style={{ fontSize:18 }}>{nav.find(n=>n.k===sec)?.label}</div>
-          <div className="flex items-center gap16">
-            <button
-              onClick={() => go("landing")}
-              className="btn btn-ghost btn-sm"
-              style={{ fontSize:13, display:"flex", alignItems:"center", gap:6 }}
-              title="메인 화면으로"
-            >
+          <div className="heading appbar-title" style={{ fontSize:17 }}>{nav.find(n=>n.k===sec)?.label}</div>
+          <div className="flex items-center gap12">
+            <button onClick={() => go("landing")} className="btn btn-ghost btn-sm appbar-home-btn" style={{ fontSize:12 }}>
               🏠 메인으로
             </button>
-            <div style={{ width:10, height:10, borderRadius:"50%", background:G.mint, boxShadow:`0 0 0 3px ${G.mintLight}` }} />
-            <div className="avatar" style={{ width:38, height:38, background:`${roleColor}20`, border:`2px solid ${roleColor}30`, fontSize:15, color:roleColor }}>{roleName[0]}</div>
+            <div style={{ width:9, height:9, borderRadius:"50%", background:G.mint, boxShadow:`0 0 0 3px ${G.mintLight}` }} />
+            <div className="avatar" style={{ width:34, height:34, background:`${roleColor}20`, border:`2px solid ${roleColor}30`, fontSize:13, color:roleColor }}>{roleName[0]}</div>
           </div>
         </div>
         {/* CONTENT */}
-        <div style={{ flex:1, overflowY:"auto", padding:28 }}>
+        <div className="shell-content" style={{ flex:1, overflowY:"auto", padding:28 }}>
           {children}
         </div>
       </div>
@@ -873,7 +977,7 @@ function NewRequest({ setSec }) {
         )}
       </div>
 
-      <div className="flex justify-between" style={{ marginTop:20 }}>
+      <div className="flex justify-between btn-row" style={{ marginTop:20 }}>
         <button className="btn btn-ghost" onClick={() => step > 1 ? setStep(s=>s-1) : setSec("dashboard")}>
           {step > 1 ? "← 이전 단계" : "취소"}
         </button>
@@ -901,7 +1005,7 @@ function RequestDetail({ go }) {
 
   return (
     <div className="anim-in" style={{ maxWidth:860, margin:"0 auto" }}>
-      <div className="flex gap20" style={{ alignItems:"flex-start" }}>
+      <div className="flex gap20 detail-wrap" style={{ alignItems:"flex-start" }}>
         {/* LEFT */}
         <div style={{ flex:1 }} className="flex-col gap16">
           <div className="card card-p-lg">
@@ -933,7 +1037,7 @@ function RequestDetail({ go }) {
         </div>
 
         {/* RIGHT */}
-        <div style={{ width:290, flexShrink:0 }} className="flex-col gap12">
+        <div className="flex-col gap12 detail-right" style={{ width:290, flexShrink:0 }}>
           <div className="label" style={{ fontSize:14, color:G.sub }}>지원한 파일럿 ({r.apps}명)</div>
           {PILOTS.slice(0, r.apps).map(p => (
             <div key={p.id} className="card card-hover card-p" style={{ padding:18 }}>
@@ -949,7 +1053,7 @@ function RequestDetail({ go }) {
                 <span style={{ fontWeight:800, color:G.sky, fontSize:16 }}>{p.rate}</span>
                 <span className={`badge ${p.tag==="슈퍼파일럿"?"badge-violet":p.tag==="인증완료"?"badge-mint":p.tag==="측량전문"?"badge-sky":"badge-amber"}`}>{p.tag}</span>
               </div>
-              <div className="flex gap8">
+              <div className="flex gap8 pilot-btns">
                 <button className="btn btn-outline btn-sm w-full" onClick={() => setChatPilot(p)}>💬 채팅</button>
                 <button className="btn btn-sky btn-sm w-full">선택하기</button>
               </div>
@@ -1341,9 +1445,9 @@ function ChatPage() {
     { me:true,  t:"전체 행사장 와이드샷 + 하이라이트 클로즈업 위주로 부탁드려요." },
   ];
   return (
-    <div className="anim-in flex" style={{ gap:16, height:"calc(100vh - 130px)" }}>
+    <div className="anim-in flex chat-wrap" style={{ gap:16, height:"calc(100vh - 130px)" }}>
       {/* list */}
-      <div style={{ width:270, background:G.white, borderRadius:18, border:`1.5px solid ${G.line}`, overflow:"hidden", display:"flex", flexDirection:"column" }}>
+      <div className="chat-list-panel" style={{ width:270, background:G.white, borderRadius:18, border:`1.5px solid ${G.line}`, overflow:"hidden", display:"flex", flexDirection:"column" }}>
         <div style={{ padding:"14px 16px", borderBottom:`1.5px solid ${G.line}` }} className="heading" >채팅 목록</div>
         {convos.map((c,i) => (
           <div key={i} onClick={() => setSel(i)} style={{ padding:"14px 16px", borderBottom:`1.5px solid ${G.line}`, cursor:"pointer", background:sel===i?G.skyLight:"#fff", borderLeft:sel===i?`3px solid ${G.sky}`:"3px solid transparent", transition:"all 0.15s" }}>
